@@ -7,11 +7,11 @@
 
 [![Tell me more](https://media.makeameme.org/created/curious-tell-me.jpg)](https://github.com/degordian/loggyslav)
 
-Loggyslav is an npm module which easily attaches to any `class`, `method` or `property` and watches for any call or change.
+> Loggyslav is an npm module which easily attaches to any `class`, `method` or `property` and watches for any call or change.
 
-When attached to a `method` it can easily track every time it is called. It can log `input parameters` and `return value`.
+> When attached to a `method` it can easily track every time it is called. It can log `input parameters` and `return value`.
 
-When attached to a `property` it can easily track every time it is updated.
+> When attached to a `property` it can easily track every time it is updated.
 
 ### Usage
 ```shell
