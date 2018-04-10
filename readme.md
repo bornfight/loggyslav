@@ -1,6 +1,7 @@
 # loggyslav [![Build Status](https://travis-ci.org/degordian/loggyslav.svg?branch=master)](https://travis-ci.org/degordian/loggyslav)
 
 ### What can loggyslav do for you?
+- Make your `Typescript/Javascript` logging easier
 - Prevent you from writing `console.log` all over the code
 - Force you to write better code by encouraging you to write smaller methods and classes so you can easily log them 
 - Give you a great tool with smart logging which enables you to easily trace and resolve possible bugs
