@@ -1,5 +1,5 @@
 {
-  "name": "@degordian/ts-logger",
+  "name": "@degordian/loggyslav",
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/index.js",
