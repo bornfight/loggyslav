@@ -1,8 +1,8 @@
 import {ClassExtractHelper} from "../../helpers/ClassExtractHelper";
-import {LoggerParams} from "../../interfaces/MethodLoggerInterface";
+import {LoggerParams} from "../../interfaces/LoggerInterface";
 import {MethodLogger} from "../../loggers/MethodLogger";
 import {PropertyLogger} from "../../loggers/PropertyLogger";
-import {ClassType, LogClassesInterface} from "../Logger";
+import {LogClassesInterface} from "../Logger";
 
 export class ClassLoggerProxy {
 
@@ -48,7 +48,7 @@ export class ClassLoggerProxy {
 
                 if (self.methodLogger !== undefined) {
                     const inputParams: any[] = [];
-                    args.forEach((value, index: number) => {
+                    args.forEach((value) => {
                         inputParams.push(value);
                     });
 
