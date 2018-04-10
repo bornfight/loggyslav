@@ -31,7 +31,7 @@ export class Logger {
 
     constructor(logDataConfiguration: LogDataConfiguration, loggerConfiguration: LoggerConfiguration) {
         this.setLogDataConfiguration(logDataConfiguration);
-        this.setLoggerConfiguratino(loggerConfiguration);
+        this.setLoggerConfiguration(loggerConfiguration);
         this.attachLoggers();
     }
 
@@ -55,7 +55,7 @@ export class Logger {
         }
     }
 
-    private setLoggerConfiguratino(loggerConfiguration: LoggerConfiguration) {
+    private setLoggerConfiguration(loggerConfiguration: LoggerConfiguration) {
         for (const key in loggerConfiguration) {
             if (loggerConfiguration[key] === undefined) {
                 continue;
