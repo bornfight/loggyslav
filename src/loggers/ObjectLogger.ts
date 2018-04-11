@@ -1,7 +1,6 @@
 /* tslint:disable:no-console */
-import {
-    LoggerParams, LoggerParamsType, LogOptions, ObjectLoggerInterface,
-} from "../interfaces/MethodLoggerInterface";
+import {LoggerParams, LoggerParamsType, LogOptions} from "../interfaces/LoggerInterface";
+import {ObjectLoggerInterface} from "../interfaces/ObjectLoggerInterface";
 import {MethodLogger} from "./MethodLogger";
 
 export class ObjectLogger implements ObjectLoggerInterface {

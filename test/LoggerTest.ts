@@ -9,8 +9,8 @@ import * as sinon from "sinon";
 import {SinonSandbox} from "sinon";
 import sinonChai = require("sinon-chai");
 import {LoggerConfiguration} from "../src";
-import {LogClassesInterface, LogDataConfiguration, Logger} from "../src/core/Logger";
-import {LoggerParams, LoggerParamsType} from "../src/interfaces/MethodLoggerInterface";
+import {LogDataConfiguration, Logger} from "../src/core/Logger";
+import {LoggerParams, LoggerParamsType} from "../src/interfaces/LoggerInterface";
 import {MethodLogger} from "../src/loggers/MethodLogger";
 import {PropertyLogger} from "../src/loggers/PropertyLogger";
 import {SimpleClass} from "./stubs/SimpleClass";
@@ -34,12 +34,6 @@ export class LoggerTest {
 
     protected logger: Logger;
     protected sandbox: SinonSandbox;
-
-    protected getDefaultInputParams(): Map<string, any> {
-        const inputParams = new Map<string, any>();
-        inputParams.set("num", 2);
-        return inputParams;
-    }
 
     protected getDefaultLogDataConfiguration(): LogDataConfiguration {
         return {

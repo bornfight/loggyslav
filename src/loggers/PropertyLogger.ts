@@ -1,4 +1,5 @@
-import {LoggerParams, LoggerParamsType, LogOptions, PropertyLoggerInterface} from "../interfaces/MethodLoggerInterface";
+import {LoggerParams, LoggerParamsType, LogOptions} from "../interfaces/LoggerInterface";
+import {PropertyLoggerInterface} from "../interfaces/PropertyLoggerInterface";
 import {ObjectLogger} from "./ObjectLogger";
 
 export class PropertyLogger extends ObjectLogger implements PropertyLoggerInterface {
