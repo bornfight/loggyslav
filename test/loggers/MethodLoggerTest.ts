@@ -9,8 +9,8 @@ import {
 import * as sinon from "sinon";
 import {SinonSandbox} from "sinon";
 import sinonChai = require("sinon-chai");
+import {MethodLogger} from "../../src/core/loggers/MethodLogger";
 import {LoggerParams, LoggerParamsType} from "../../src/interfaces/LoggerInterface";
-import {MethodLogger} from "../../src/loggers/MethodLogger";
 
 const expect = chai.expect;
 

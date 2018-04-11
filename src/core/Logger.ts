@@ -1,5 +1,5 @@
-import {MethodLogger} from "../loggers/MethodLogger";
-import {PropertyLogger} from "../loggers/PropertyLogger";
+import {MethodLogger} from "./loggers/MethodLogger";
+import {PropertyLogger} from "./loggers/PropertyLogger";
 import {ClassLoggerProxy} from "./proxies/ClassLoggerProxy";
 
 export type ClassType = new (...args: any[]) => any;

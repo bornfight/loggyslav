@@ -1,8 +1,8 @@
 import {ClassExtractHelper} from "../../helpers/ClassExtractHelper";
 import {LoggerParams} from "../../interfaces/LoggerInterface";
-import {MethodLogger} from "../../loggers/MethodLogger";
-import {PropertyLogger} from "../../loggers/PropertyLogger";
 import {LogClassesInterface} from "../Logger";
+import {MethodLogger} from "../loggers/MethodLogger";
+import {PropertyLogger} from "../loggers/PropertyLogger";
 
 export class ClassLoggerProxy {
 

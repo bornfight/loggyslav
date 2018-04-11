@@ -10,9 +10,9 @@ import {SinonSandbox} from "sinon";
 import sinonChai = require("sinon-chai");
 import {LoggerConfiguration} from "../src";
 import {LogDataConfiguration, Logger} from "../src/core/Logger";
+import {MethodLogger} from "../src/core/loggers/MethodLogger";
+import {PropertyLogger} from "../src/core/loggers/PropertyLogger";
 import {LoggerParams, LoggerParamsType} from "../src/interfaces/LoggerInterface";
-import {MethodLogger} from "../src/loggers/MethodLogger";
-import {PropertyLogger} from "../src/loggers/PropertyLogger";
 import {SimpleClass} from "./stubs/SimpleClass";
 import {SomeOtherClass} from "./stubs/SomeOtherClass";
 
