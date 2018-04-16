@@ -1,14 +1,14 @@
 import {ClassExtractHelper} from "../../helpers/ClassExtractHelper";
 import {LoggerParams} from "../../interfaces/LoggerInterface";
 import {LogClassesInterface} from "../Logger";
-import {MethodLogger} from "../loggers/MethodLogger";
+import {SimpleMethodLoggyslav} from "../loggers/MethodLogger";
 import {PropertyLogger} from "../loggers/PropertyLogger";
 
 export class ClassLoggerProxy {
 
     public logClassProperties: LogClassesInterface;
 
-    protected methodLogger: MethodLogger;
+    protected methodLogger: SimpleMethodLoggyslav;
     protected propertyLogger: PropertyLogger;
 
     constructor(logClass: LogClassesInterface) {
@@ -27,7 +27,7 @@ export class ClassLoggerProxy {
         }
     }
 
-    public setMethodLogger(methodLogger: MethodLogger) {
+    public setMethodLogger(methodLogger: SimpleMethodLoggyslav) {
         this.methodLogger = methodLogger;
     }
 
