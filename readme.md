@@ -14,9 +14,50 @@
 
 > When attached to a `property` it can easily track every time it is updated.
 
-### Usage
-```shell
-TODO
+## Usage
+#### Using Winston.js as a method logger
+
+```typescript
+const winstonNewLogger = new winston.Logger( {
+    level: "info",
+    transports: [
+        new winston.transports.Console(),
+    ],
+} );
+const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
+
+const classConfiguration: LogDataConfiguration = {
+    classes: [
+        {
+            classType: SimpleClass,
+        },
+    ],
+};
+const loggerConfiguration: LoggerConfiguration = {
+    methodLogger: winstonLogger,
+};
+
+const loggyslav = new Loggyslav(
+    classConfiguration,
+    loggerConfiguration,
+);
+```
+
+#### Using simple console log as a method logging
+```typescript
+const simpleMethodLoggyslav = new SimpleMethodLoggyslav();
+const logDataConfiguration: LogDataConfiguration = {
+    classes: [
+        {
+            classType: SimpleClass,
+            properties: ["a"],
+        },
+    ],
+};
+const loggerConfiguration = {
+    methodLogger: simpleMethodLoggyslav,
+};
+const loggyslav = new Loggyslav(logDataConfiguration, loggerConfiguration);
 ```
 ### Features
 TODO
