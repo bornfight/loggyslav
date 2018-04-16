@@ -1,7 +1,6 @@
 /* tslint:disable:no-console */
 import {LoggerParams, LoggerParamsType, LogOptions} from "../../interfaces/LoggerInterface";
 import {ObjectLoggerInterface} from "../../interfaces/ObjectLoggerInterface";
-import {SimpleMethodLoggyslav} from "./SimpleMethodLoggyslav";
 
 export class ObjectLogger implements ObjectLoggerInterface {
     public static LOGGER_ON = true;
@@ -31,7 +30,7 @@ export class ObjectLogger implements ObjectLoggerInterface {
     }
 
     public isOn(): boolean  {
-        if (SimpleMethodLoggyslav.LOGGER_ON === false) {
+        if (ObjectLogger.LOGGER_ON === false) {
             return false;
         }
 

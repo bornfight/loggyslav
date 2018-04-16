@@ -1,5 +1,6 @@
 /* tslint:disable:no-unused-expression */
 /* tslint:disable:max-line-length */
+/* tslint:disable:no-dead-store */
 import * as chai from "chai";
 import {
     suite, test,

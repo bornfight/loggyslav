@@ -1,4 +1,4 @@
-import {ClassType} from "../core/Logger";
+import {ClassType} from "../core/Loggyslav";
 
 export class ClassExtractHelper {
 
