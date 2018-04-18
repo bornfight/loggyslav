@@ -1,5 +1,6 @@
-import {MethodLogger} from "./loggers/MethodLogger";
+import {MethodLoggerInterface} from "../interfaces/MethodLoggerInterface";
 import {PropertyLogger} from "./loggers/PropertyLogger";
+import {SimpleMethodLoggyslav} from "./loggers/SimpleMethodLoggyslav";
 import {ClassLoggerProxy} from "./proxies/ClassLoggerProxy";
 
 export type ClassType = new (...args: any[]) => any;
@@ -14,17 +15,17 @@ export interface LogDataConfiguration {
 }
 
 export interface LoggerConfiguration {
-    methodLogger: MethodLogger;
+    methodLogger: SimpleMethodLoggyslav;
     propertyLogger?: PropertyLogger;
 }
 
-export class Logger {
+export class Loggyslav {
     private logDataConfiguration: LogDataConfiguration = {
         classes: [],
     };
 
     private loggerConfiguration: LoggerConfiguration = {
-        methodLogger: new MethodLogger(),
+        methodLogger: new SimpleMethodLoggyslav(),
     };
 
     private classLoggers: ClassLoggerProxy[] = [];
