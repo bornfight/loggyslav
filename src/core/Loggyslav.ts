@@ -14,9 +14,13 @@ export interface TargetsConfiguration {
     targets: LogClassesInterface[];
 }
 
-export interface LoggerConfiguration {
+export interface LoggersInterface {
     methodLogger: SimpleMethodLoggyslav;
     propertyLogger?: PropertyLogger;
+}
+
+export interface LoggerConfiguration extends LoggersInterface {
+    logLevel?: string;
 }
 
 export class Loggyslav {
