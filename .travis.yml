@@ -7,3 +7,4 @@ script: npm run travis:test
 cache:
   directories:
     - "node_modules"
+
