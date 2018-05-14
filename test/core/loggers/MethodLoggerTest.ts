@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-expression */
 /* tslint:disable:max-line-length */
-/* tslint:disable:max-classes-per-file */
+/* tslint:disable:max-targets-per-file */
 import * as assert from "assert";
 import * as chai from "chai";
 import {

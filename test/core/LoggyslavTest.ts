@@ -10,7 +10,7 @@ import {SinonSandbox} from "sinon";
 import sinonChai = require("sinon-chai");
 import {PropertyLogger} from "../../src/core/loggers/PropertyLogger";
 import {SimpleMethodLoggyslav} from "../../src/core/loggers/SimpleMethodLoggyslav";
-import {LogDataConfiguration, Loggyslav} from "../../src/core/Loggyslav";
+import {Loggyslav, TargetsConfiguration} from "../../src/core/Loggyslav";
 import {LoggerConfiguration} from "../../src/index";
 import {LoggerParams, LoggerParamsType} from "../../src/interfaces/LoggerInterface";
 import {SimpleClass} from "../stubs/SimpleClass";
@@ -35,9 +35,9 @@ export class LoggyslavTest {
     protected logger: Loggyslav;
     protected sandbox: SinonSandbox;
 
-    protected getDefaultLogDataConfiguration(): LogDataConfiguration {
+    protected getDefaultLogDataConfiguration(): TargetsConfiguration {
         return {
-            classes: [
+            targets: [
                 {
                     classType: SimpleClass,
                     properties: ["a"],
@@ -46,8 +46,8 @@ export class LoggyslavTest {
         };
     }
 
-    protected initNewLogger(logDataConfiguration: LogDataConfiguration, loggerConfiguration: LoggerConfiguration) {
-        this.logger = new Loggyslav(logDataConfiguration, loggerConfiguration);
+    protected initNewLogger(targetsConfiguration: TargetsConfiguration, loggerConfiguration: LoggerConfiguration) {
+        this.logger = new Loggyslav(targetsConfiguration, loggerConfiguration);
     }
 
     protected before() {
@@ -62,7 +62,7 @@ export class LoggyslavTest {
     @test
     private "Should not change class instance on simpleClass when logger is initialized"() {
         const methodLogger = new SimpleMethodLoggyslav();
-        const logDataConfiguration: LogDataConfiguration = this.getDefaultLogDataConfiguration();
+        const logDataConfiguration: TargetsConfiguration = this.getDefaultLogDataConfiguration();
         const loggerConfiguration = {
             methodLogger,
         };
@@ -78,7 +78,7 @@ export class LoggyslavTest {
     @test
     private "Should call method logMethodCall once when logger is initialized and simpleMethod is called"() {
         const methodLogger = new SimpleMethodLoggyslav();
-        const logDataConfiguration: LogDataConfiguration = this.getDefaultLogDataConfiguration();
+        const logDataConfiguration: TargetsConfiguration = this.getDefaultLogDataConfiguration();
         const loggerConfiguration = {
             methodLogger,
         };
@@ -105,8 +105,8 @@ export class LoggyslavTest {
         simpleClass.sumTwoNumbers(2, 3);
 
         const firstTimeCalled = spy.args[0];
-        const firstInputParam: LoggerParams = firstTimeCalled[0];
         expect(firstTimeCalled, LoggyslavTest.EXPECT_MESSAGE.AT_LEAST_ONCE).not.undefined;
+        const firstInputParam: LoggerParams = firstTimeCalled[0];
 
         const params: number[] = firstInputParam.inputParams;
         const className: string | undefined = firstInputParam.className;
@@ -137,8 +137,8 @@ export class LoggyslavTest {
     private "Should not call logInput when class SimpleMethod logs non of methods"() {
         const someClass = new SomeOtherClass();
         const methodLogger = new SimpleMethodLoggyslav();
-        const logDataConfiguration: LogDataConfiguration = {
-            classes: [
+        const logDataConfiguration: TargetsConfiguration = {
+            targets: [
                 {
                     classType: SimpleClass,
                     methods: [],
@@ -162,8 +162,8 @@ export class LoggyslavTest {
         const someClass = new SimpleClass();
         const methodLogger = new SimpleMethodLoggyslav();
         const propertyLogger = new PropertyLogger();
-        const logDataConfiguration: LogDataConfiguration = {
-            classes: [
+        const logDataConfiguration: TargetsConfiguration = {
+            targets: [
                 {
                     classType: SimpleClass,
                     methods: [],
@@ -204,8 +204,8 @@ export class LoggyslavTest {
         const someClass = new SimpleClass();
         const methodLogger = new SimpleMethodLoggyslav();
         const propertyLogger = new PropertyLogger();
-        const logDataConfiguration: LogDataConfiguration = {
-            classes: [
+        const logDataConfiguration: TargetsConfiguration = {
+            targets: [
                 {
                     classType: SimpleClass,
                     methods: [],

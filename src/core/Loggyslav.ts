@@ -10,18 +10,22 @@ export interface LogClassesInterface {
     properties?: string[];
 }
 
-export interface LogDataConfiguration {
-    classes: LogClassesInterface[];
+export interface TargetsConfiguration {
+    targets: LogClassesInterface[];
 }
 
-export interface LoggerConfiguration {
+export interface LoggersInterface {
     methodLogger: SimpleMethodLoggyslav;
     propertyLogger?: PropertyLogger;
 }
 
+export interface LoggerConfiguration extends LoggersInterface {
+    logLevel?: string;
+}
+
 export class Loggyslav {
-    private logDataConfiguration: LogDataConfiguration = {
-        classes: [],
+    private logDataConfiguration: TargetsConfiguration = {
+        targets: [],
     };
 
     private loggerConfiguration: LoggerConfiguration = {
@@ -30,7 +34,7 @@ export class Loggyslav {
 
     private classLoggers: ClassLoggerProxy[] = [];
 
-    constructor(logDataConfiguration: LogDataConfiguration, loggerConfiguration: LoggerConfiguration) {
+    constructor(logDataConfiguration: TargetsConfiguration, loggerConfiguration: LoggerConfiguration) {
         this.setLogDataConfiguration(logDataConfiguration);
         this.setLoggerConfiguration(loggerConfiguration);
         this.attachLoggers();
@@ -46,7 +50,7 @@ export class Loggyslav {
         this.classLoggers.push(classLogger);
     }
 
-    private setLogDataConfiguration(logDataConfiguration: LogDataConfiguration) {
+    private setLogDataConfiguration(logDataConfiguration: TargetsConfiguration) {
         for (const key in logDataConfiguration) {
             if (logDataConfiguration[key] === undefined) {
                 continue;
@@ -71,7 +75,7 @@ export class Loggyslav {
     }
 
     private attachClassLoggers() {
-        this.logDataConfiguration.classes.forEach((logClass: LogClassesInterface) => {
+        this.logDataConfiguration.targets.forEach((logClass: LogClassesInterface) => {
             const classLoggerProxy = new ClassLoggerProxy(logClass);
             classLoggerProxy.setMethodLogger(this.loggerConfiguration.methodLogger);
 

@@ -9,7 +9,7 @@ import {SinonSandbox} from "sinon";
 import * as sinon from "sinon";
 import sinonChai = require("sinon-chai");
 import * as winston from "winston";
-import {LogDataConfiguration, LoggerConfiguration, Loggyslav} from "../../src";
+import {LoggerConfiguration, Loggyslav, TargetsConfiguration} from "../../src";
 import {WinstonLoggyslav} from "../../src/loggers/WinstonLoggyslav";
 import {SimpleClass} from "../stubs/SimpleClass";
 
@@ -39,8 +39,8 @@ export class WinstonLoggyslavTest {
         } );
         const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
 
-        const classConfiguration: LogDataConfiguration = {
-            classes: [
+        const classConfiguration: TargetsConfiguration = {
+            targets: [
                 {
                     classType: SimpleClass,
                 },
