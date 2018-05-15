@@ -11,9 +11,9 @@ import * as sinon from "sinon";
 import sinonChai = require("sinon-chai");
 import * as winston from "winston";
 import {LoggerConfiguration, Loggyslav, TargetsConfiguration} from "../../src";
+import {WinstonErrorLoggyslav} from "../../src/loggers/WinstonErrorLoggyslav";
 import {WinstonLoggyslav} from "../../src/loggers/WinstonLoggyslav";
 import {SimpleClass} from "../stubs/SimpleClass";
-import {WinstonErrorLoggyslav} from "../../src/loggers/WinstonErrorLoggyslav";
 
 const expect = chai.expect;
 
