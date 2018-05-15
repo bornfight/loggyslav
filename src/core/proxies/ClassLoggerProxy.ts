@@ -12,8 +12,6 @@ export class ClassLoggerProxy {
 
     protected loggers: LoggersInterface = {
         methodLogger: new SimpleMethodLoggyslav(),
-        // propertyLogger: new PropertyLogger(),
-        // errorLogger: new SimpleErrorLoggyslav(),
     };
 
     constructor(logClass: LogClassesInterface) {
