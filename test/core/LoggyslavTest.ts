@@ -1,6 +1,8 @@
 /* tslint:disable:no-unused-expression */
 /* tslint:disable:max-line-length */
 /* tslint:disable:no-dead-store */
+/* tslint:disable:no-empty */
+
 import * as chai from "chai";
 import {
     only, skip, suite, test,
@@ -9,6 +11,7 @@ import * as sinon from "sinon";
 import {SinonSandbox} from "sinon";
 import sinonChai = require("sinon-chai");
 import {PropertyLogger} from "../../src/core/loggers/PropertyLogger";
+import {SimpleErrorLoggyslav} from "../../src/core/loggers/SimpleErrorLoggyslav";
 import {SimpleMethodLoggyslav} from "../../src/core/loggers/SimpleMethodLoggyslav";
 import {Loggyslav, TargetsConfiguration} from "../../src/core/Loggyslav";
 import {LoggerConfiguration} from "../../src/index";
@@ -181,7 +184,6 @@ export class LoggyslavTest {
         this.initNewLogger(logDataConfiguration, loggerConfiguration);
 
         someClass.setA(5);
-
         expect(spy.args.length, LoggyslavTest.EXPECT_MESSAGE.AT_LEAST_ONCE).equals(1);
 
         const firstTimeCalled = spy.args[0];
@@ -240,5 +242,40 @@ export class LoggyslavTest {
         expect(className, LoggyslavTest.EXPECT_MESSAGE.CLASS_NAME).deep.equals("SimpleClass");
         expect(propertyName, LoggyslavTest.EXPECT_MESSAGE.PROPERTY_NAME).deep.equals("a");
         expect(type, LoggyslavTest.EXPECT_MESSAGE.TO_BE_PROPERTY).deep.equals(LoggerParamsType.PROPERTY);
+    }
+
+    @test
+    private "Should call logError when method throws an error"() {
+
+        const methodLogger = new SimpleMethodLoggyslav();
+        const winstonErrorLogger = new SimpleErrorLoggyslav();
+        const targetsConfiguration: TargetsConfiguration = {
+            targets: [
+                {
+                    classType: SimpleClass,
+                    methods: ["throwError"],
+                },
+            ],
+        };
+        const loggerConfiguration: LoggerConfiguration = {
+            methodLogger,
+            errorLogger: winstonErrorLogger,
+        };
+
+        this.initNewLogger(targetsConfiguration, loggerConfiguration);
+
+        const simpleClass = new SimpleClass();
+        const spy = this.sandbox.spy(winstonErrorLogger, "error");
+
+        try {
+            simpleClass.throwError();
+        } catch (e) {
+        }
+
+        expect(spy.callCount, "Expect to be called once").equals(1);
+
+        const firstCallArgs = spy.args[0];
+
+        expect(firstCallArgs).deep.equal([`${SimpleClass.errorMsg}`]);
     }
 }

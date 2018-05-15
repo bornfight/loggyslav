@@ -18,7 +18,10 @@ export class ObjectLogger implements ObjectLoggerInterface {
     }
 
     public error(...args: any[]): void {
-        //
+        if (!this.isOn()) {
+            return;
+        }
+        console.error(args[0]);
     }
 
     public executionTime() {

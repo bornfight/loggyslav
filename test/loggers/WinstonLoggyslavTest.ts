@@ -1,6 +1,7 @@
 /* tslint:disable:no-unused-expression */
 /* tslint:disable:max-line-length */
 /* tslint:disable:no-dead-store */
+/* tslint:disable:no-empty */
 import * as chai from "chai";
 import {
     suite, test,
@@ -20,6 +21,7 @@ chai.use(sinonChai);
 @suite("WinstonLoggyslav")
 export class WinstonLoggyslavTest {
     protected sandbox: SinonSandbox;
+    protected logger: Loggyslav;
 
     protected before() {
         this.sandbox = sinon.sandbox.create();
@@ -27,6 +29,11 @@ export class WinstonLoggyslavTest {
 
     protected after() {
         this.sandbox.restore();
+        this.logger.disable();
+    }
+
+    protected initNewLogger(targetsConfiguration: TargetsConfiguration, loggerConfiguration: LoggerConfiguration) {
+        this.logger = new Loggyslav(targetsConfiguration, loggerConfiguration);
     }
 
     @test
@@ -38,8 +45,7 @@ export class WinstonLoggyslavTest {
             ],
         } );
         const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
-
-        const classConfiguration: TargetsConfiguration = {
+        const targetsConfiguration: TargetsConfiguration = {
             targets: [
                 {
                     classType: SimpleClass,
@@ -50,13 +56,10 @@ export class WinstonLoggyslavTest {
             methodLogger: winstonLogger,
         };
 
-        const loggyslav = new Loggyslav(
-            classConfiguration,
-            loggerConfiguration,
-        );
+        this.initNewLogger(targetsConfiguration, loggerConfiguration);
 
         const simpleClass = new SimpleClass();
-        const spy = sinon.spy(winstonLogger, "log");
+        const spy = this.sandbox.spy(winstonLogger, "log");
 
         simpleClass.sumTwoNumbers(5, 3);
 

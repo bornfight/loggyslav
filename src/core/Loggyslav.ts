@@ -1,5 +1,6 @@
 import {MethodLoggerInterface} from "../interfaces/MethodLoggerInterface";
 import {PropertyLogger} from "./loggers/PropertyLogger";
+import {SimpleErrorLoggyslav} from "./loggers/SimpleErrorLoggyslav";
 import {SimpleMethodLoggyslav} from "./loggers/SimpleMethodLoggyslav";
 import {ClassLoggerProxy} from "./proxies/ClassLoggerProxy";
 
@@ -17,6 +18,7 @@ export interface TargetsConfiguration {
 export interface LoggersInterface {
     methodLogger: SimpleMethodLoggyslav;
     propertyLogger?: PropertyLogger;
+    errorLogger?: SimpleErrorLoggyslav;
 }
 
 export interface LoggerConfiguration extends LoggersInterface {
@@ -24,7 +26,7 @@ export interface LoggerConfiguration extends LoggersInterface {
 }
 
 export class Loggyslav {
-    private logDataConfiguration: TargetsConfiguration = {
+    private targetsConfiguration: TargetsConfiguration = {
         targets: [],
     };
 
@@ -34,8 +36,8 @@ export class Loggyslav {
 
     private classLoggers: ClassLoggerProxy[] = [];
 
-    constructor(logDataConfiguration: TargetsConfiguration, loggerConfiguration: LoggerConfiguration) {
-        this.setLogDataConfiguration(logDataConfiguration);
+    constructor(targetsConfiguration: TargetsConfiguration, loggerConfiguration: LoggerConfiguration) {
+        this.setTargetsConfiguration(targetsConfiguration);
         this.setLoggerConfiguration(loggerConfiguration);
         this.attachLoggers();
     }
@@ -50,13 +52,13 @@ export class Loggyslav {
         this.classLoggers.push(classLogger);
     }
 
-    private setLogDataConfiguration(logDataConfiguration: TargetsConfiguration) {
+    private setTargetsConfiguration(logDataConfiguration: TargetsConfiguration) {
         for (const key in logDataConfiguration) {
             if (logDataConfiguration[key] === undefined) {
                 continue;
             }
 
-            this.logDataConfiguration[key] = logDataConfiguration[key];
+            this.targetsConfiguration[key] = logDataConfiguration[key];
         }
     }
 
@@ -75,15 +77,23 @@ export class Loggyslav {
     }
 
     private attachClassLoggers() {
-        this.logDataConfiguration.targets.forEach((logClass: LogClassesInterface) => {
+        this.targetsConfiguration.targets.forEach((logClass: LogClassesInterface) => {
             const classLoggerProxy = new ClassLoggerProxy(logClass);
             classLoggerProxy.setMethodLogger(this.loggerConfiguration.methodLogger);
+
+            if (this.loggerConfiguration.errorLogger !== undefined) {
+                classLoggerProxy.setErrorLogger(this.loggerConfiguration.errorLogger);
+
+            }
 
             if (this.loggerConfiguration.propertyLogger !== undefined) {
                 classLoggerProxy.setPropertyLogger(this.loggerConfiguration.propertyLogger);
             }
 
+            classLoggerProxy.attachClassMethodsProxy();
+
             this.addClassLogger(classLoggerProxy);
         });
+
     }
 }
