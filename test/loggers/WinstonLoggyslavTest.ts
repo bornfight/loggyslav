@@ -13,6 +13,7 @@ import * as winston from "winston";
 import {LoggerConfiguration, Loggyslav, TargetsConfiguration} from "../../src";
 import {WinstonLoggyslav} from "../../src/loggers/WinstonLoggyslav";
 import {SimpleClass} from "../stubs/SimpleClass";
+import {WinstonErrorLoggyslav} from "../../src/loggers/WinstonErrorLoggyslav";
 
 const expect = chai.expect;
 
@@ -68,5 +69,54 @@ export class WinstonLoggyslavTest {
         const firstCallArgs = spy.args[0];
 
         expect(firstCallArgs).deep.include([5, 3]);
+    }
+
+    @test
+    private "Should call WinstonLogger when initialized as error logger"() {
+        const winstonNewLogger = new winston.Logger( {
+            level: "info",
+            transports: [
+                new winston.transports.Console(),
+            ],
+        } );
+        const winstonNewErrorLogger = new winston.Logger( {
+            level: "error",
+            transports: [
+                new winston.transports.Console(),
+            ],
+        } );
+        const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
+        const winstonErrorLogger = new WinstonErrorLoggyslav(winstonNewErrorLogger);
+
+        const targetsConfiguration: TargetsConfiguration = {
+            targets: [
+                {
+                    classType: SimpleClass,
+                    methods: [
+                        "throwError",
+                    ],
+                },
+            ],
+        };
+        const loggerConfiguration: LoggerConfiguration = {
+            methodLogger: winstonLogger,
+            errorLogger: winstonErrorLogger,
+        };
+
+        this.initNewLogger(targetsConfiguration, loggerConfiguration);
+
+        const simpleClass = new SimpleClass();
+        const spy = sinon.spy(winstonErrorLogger, "error");
+
+        try {
+            simpleClass.throwError();
+        } catch (e) {
+        }
+
+        expect(spy.callCount, "Expect to be called once").equals(1);
+
+        const firstCallArgs = spy.args[0];
+
+        expect(firstCallArgs[0]).deep.include([SimpleClass.errorMsg]);
     }
 }
