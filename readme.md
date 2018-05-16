@@ -17,7 +17,7 @@
 ## Usage
 
 
-#### Using simple console log as a method logging
+#### Using simple console log as a Method logging
 ```typescript
 const simpleMethodLoggyslav = new SimpleMethodLoggyslav();
 const targetsConfiguration: TargetsConfiguration = {
@@ -35,7 +35,7 @@ const loggyslav = new Loggyslav(targetsConfiguration, loggerConfiguration);
 ```
 
 
-#### Using Winston.js as a method logger
+#### Using Winston.js as Method logger
 
 ```typescript
 const winstonNewLogger = new winston.Logger( {
@@ -62,7 +62,7 @@ const loggyslav = new Loggyslav(
 );
 ```
 
-#### Using Winston.js as a error logger
+#### Using Winston.js as Error logger
 
 ```typescript
 const winstonNewLogger = new winston.Logger( {
