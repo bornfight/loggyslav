@@ -15,6 +15,26 @@
 > When attached to a `property` it can easily track every time it is updated.
 
 ## Usage
+
+
+#### Using simple console log as a method logging
+```typescript
+const simpleMethodLoggyslav = new SimpleMethodLoggyslav();
+const targetsConfiguration: TargetsConfiguration = {
+    targets: [
+        {
+            classType: SimpleClass,
+            properties: ["a"],
+        },
+    ],
+};
+const loggerConfiguration = {
+    methodLogger: simpleMethodLoggyslav,
+};
+const loggyslav = new Loggyslav(targetsConfiguration, loggerConfiguration);
+```
+
+
 #### Using Winston.js as a method logger
 
 ```typescript
@@ -25,39 +45,21 @@ const winstonNewLogger = new winston.Logger( {
     ],
 } );
 const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
-
-const classConfiguration: LogDataConfiguration = {
-    classes: [
+const targetsConfiguration: TargetsConfiguration = {
+    targets: [
         {
             classType: SimpleClass,
         },
     ],
 };
-const loggerConfiguration: LoggerConfiguration = {
+const loggerConfiguration: targetsConfiguration = {
     methodLogger: winstonLogger,
 };
 
 const loggyslav = new Loggyslav(
-    classConfiguration,
+    targetsConfiguration,
     loggerConfiguration,
 );
-```
-
-#### Using simple console log as a method logging
-```typescript
-const simpleMethodLoggyslav = new SimpleMethodLoggyslav();
-const logDataConfiguration: LogDataConfiguration = {
-    classes: [
-        {
-            classType: SimpleClass,
-            properties: ["a"],
-        },
-    ],
-};
-const loggerConfiguration = {
-    methodLogger: simpleMethodLoggyslav,
-};
-const loggyslav = new Loggyslav(logDataConfiguration, loggerConfiguration);
 ```
 
 #### Using Winston.js as a error logger
@@ -72,8 +74,8 @@ const winstonNewLogger = new winston.Logger( {
 const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
 const winstonErrorLogger = new WinstonErrorLoggyslav(winstonNewErrorLogger);
 
-const classConfiguration: LogDataConfiguration = {
-    classes: [
+const targetsConfiguration: TargetsConfiguration = {
+    targets: [
         {
             classType: SimpleClass,
         },
@@ -85,7 +87,7 @@ const loggerConfiguration: LoggerConfiguration = {
 };
 
 const loggyslav = new Loggyslav(
-    classConfiguration,
+    targetsConfiguration,
     loggerConfiguration,
 );
 ```
