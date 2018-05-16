@@ -1,6 +1,6 @@
 {
   "name": "@degordian/loggyslav",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -16,7 +16,8 @@
     "travis:test": "npm run build && npm run test",
     "prepublishOnly": "npm run build && npm run test"
   },
-  "author": "",
+  "author": "Tomislav Fabeta (Degordian)",
+  "repository": "https://github.com/degordian/loggyslav",
   "license": "ISC",
   "dependencies": {
     "@degordian/standards": "^1.0.7",
@@ -35,6 +36,9 @@
     "mocha": "^5.0.5"
   },
   "keywords": [
+    "logging",
+    "node",
+    "docker",
     "logger",
     "log",
     "loggyslav",
