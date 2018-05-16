@@ -52,13 +52,13 @@ export class Loggyslav {
         this.classLoggers.push(classLogger);
     }
 
-    private setTargetsConfiguration(logDataConfiguration: TargetsConfiguration) {
-        for (const key in logDataConfiguration) {
-            if (logDataConfiguration[key] === undefined) {
+    private setTargetsConfiguration(targetsConfiguration: TargetsConfiguration) {
+        for (const key in targetsConfiguration) {
+            if (targetsConfiguration[key] === undefined) {
                 continue;
             }
 
-            this.targetsConfiguration[key] = logDataConfiguration[key];
+            this.targetsConfiguration[key] = targetsConfiguration[key];
         }
     }
 
