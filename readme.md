@@ -1,10 +1,12 @@
+
 # loggyslav [![Build Status](https://travis-ci.org/degordian/loggyslav.svg?branch=master)](https://travis-ci.org/degordian/loggyslav)
 
 ### What can loggyslav do for you?
+
 - Make your `Typescript/Javascript` logging easier
 - Prevent you from writing `console.log` all over the code
-- Force you to write better code by encouraging you to write smaller methods and classes so you can easily log them 
-- Give you a great tool with smart logging which enables you to easily trace and resolve possible bugs
+- Force you to write **better** code by encouraging you to write smaller methods and classes so you can easily log them 
+- Give you a great tool with **smart logging** which enables you to easily trace and resolve possible bugs
 
 [![Tell me more](https://media.makeameme.org/created/curious-tell-me.jpg)](https://github.com/degordian/loggyslav)
 
@@ -15,39 +17,13 @@
 > When attached to a `property` it can easily track every time it is updated.
 
 ## Usage
-#### Using Winston.js as a method logger
 
-```typescript
-const winstonNewLogger = new winston.Logger( {
-    level: "info",
-    transports: [
-        new winston.transports.Console(),
-    ],
-} );
-const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
 
-const classConfiguration: LogDataConfiguration = {
-    classes: [
-        {
-            classType: SimpleClass,
-        },
-    ],
-};
-const loggerConfiguration: LoggerConfiguration = {
-    methodLogger: winstonLogger,
-};
-
-const loggyslav = new Loggyslav(
-    classConfiguration,
-    loggerConfiguration,
-);
-```
-
-#### Using simple console log as a method logging
+#### Using simple console log as a Method logging
 ```typescript
 const simpleMethodLoggyslav = new SimpleMethodLoggyslav();
-const logDataConfiguration: LogDataConfiguration = {
-    classes: [
+const targetsConfiguration: TargetsConfiguration = {
+    targets: [
         {
             classType: SimpleClass,
             properties: ["a"],
@@ -57,10 +33,38 @@ const logDataConfiguration: LogDataConfiguration = {
 const loggerConfiguration = {
     methodLogger: simpleMethodLoggyslav,
 };
-const loggyslav = new Loggyslav(logDataConfiguration, loggerConfiguration);
+const loggyslav = new Loggyslav(targetsConfiguration, loggerConfiguration);
 ```
 
-#### Using Winston.js as a error logger
+
+#### Using Winston.js as Method logger
+
+```typescript
+const winstonNewLogger = new winston.Logger( {
+    level: "info",
+    transports: [
+        new winston.transports.Console(),
+    ],
+} );
+const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
+const targetsConfiguration: TargetsConfiguration = {
+    targets: [
+        {
+            classType: SimpleClass,
+        },
+    ],
+};
+const loggerConfiguration: targetsConfiguration = {
+    methodLogger: winstonLogger,
+};
+
+const loggyslav = new Loggyslav(
+    targetsConfiguration,
+    loggerConfiguration,
+);
+```
+
+#### Using Winston.js as Error logger
 
 ```typescript
 const winstonNewLogger = new winston.Logger( {
@@ -72,8 +76,8 @@ const winstonNewLogger = new winston.Logger( {
 const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
 const winstonErrorLogger = new WinstonErrorLoggyslav(winstonNewErrorLogger);
 
-const classConfiguration: LogDataConfiguration = {
-    classes: [
+const targetsConfiguration: TargetsConfiguration = {
+    targets: [
         {
             classType: SimpleClass,
         },
@@ -85,12 +89,17 @@ const loggerConfiguration: LoggerConfiguration = {
 };
 
 const loggyslav = new Loggyslav(
-    classConfiguration,
+    targetsConfiguration,
     loggerConfiguration,
 );
 ```
 ### Features
-TODO
+- [x]  Method input and output logging
+- [x]  Property change logging
+- [x]  Error logging
+- [ ] Creating easy benchmark tracking
+- [ ] Track memory consumtion
+
 ### Development
 
 Want to contribute? Great!
