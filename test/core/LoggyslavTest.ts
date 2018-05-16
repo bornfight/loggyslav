@@ -278,4 +278,24 @@ export class LoggyslavTest {
 
         expect(firstCallArgs).deep.equal([`${SimpleClass.errorMsg}`]);
     }
+
+    @test
+    private async "Should call method logMethodCall after promise resolving when logger is initialized and returnPromise is called"() {
+        const methodLogger = new SimpleMethodLoggyslav();
+        const logDataConfiguration: TargetsConfiguration = this.getDefaultLogDataConfiguration();
+        const loggerConfiguration = {
+            methodLogger,
+        };
+        const spy = this.sandbox.spy(methodLogger, "logMethodCall");
+        this.initNewLogger(logDataConfiguration, loggerConfiguration);
+
+        const simpleClass = new SimpleClass();
+        await simpleClass.returnPromise();
+
+        expect(spy.callCount, "logMethodCall called once").equals(1);
+
+        const firstCallArgs = spy.args[0];
+        expect(firstCallArgs[0].outputValue, "logMethodCall should not be instanceOf Promise").not.instanceof(Promise);
+        expect(firstCallArgs[0].outputValue, "logMethodCall with number as outputValue").equals(2);
+    }
 }

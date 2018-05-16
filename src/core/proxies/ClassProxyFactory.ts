@@ -51,6 +51,15 @@ export class ClassProxyFactory {
                     logParams.className = self.className;
                 }
 
+                if (outputValue instanceof Promise) {
+                    outputValue.then((value: any) => {
+                        logParams.outputValue = value;
+                        self.loggers.methodLogger.logMethodCall(logParams);
+                    });
+
+                    return outputValue;
+                }
+
                 self.loggers.methodLogger.logMethodCall(logParams);
 
                 return outputValue;
