@@ -59,6 +59,36 @@ const loggerConfiguration = {
 };
 const loggyslav = new Loggyslav(logDataConfiguration, loggerConfiguration);
 ```
+
+#### Using Winston.js as a error logger
+
+```typescript
+const winstonNewLogger = new winston.Logger( {
+    level: "error",
+    transports: [
+        new winston.transports.Console(),
+    ],
+} );
+const winstonLogger = new WinstonLoggyslav(winstonNewLogger);
+const winstonErrorLogger = new WinstonErrorLoggyslav(winstonNewErrorLogger);
+
+const classConfiguration: LogDataConfiguration = {
+    classes: [
+        {
+            classType: SimpleClass,
+        },
+    ],
+};
+const loggerConfiguration: LoggerConfiguration = {
+    methodLogger: winstonLogger,
+    errorLogger: winstonErrorLogger,
+};
+
+const loggyslav = new Loggyslav(
+    classConfiguration,
+    loggerConfiguration,
+);
+```
 ### Features
 TODO
 ### Development

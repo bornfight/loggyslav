@@ -29,3 +29,7 @@ export interface LoggerParams extends LoggerOptionalLogParams {
     propertyName: string;
     stack?: CallSite[];
 }
+
+export interface ErrorObject extends LoggerOptionalLogParams {
+    message: string;
+}

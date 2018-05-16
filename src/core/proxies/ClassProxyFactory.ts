@@ -17,29 +17,41 @@ export class ClassProxyFactory {
         if (methodName === "constructor" && this.className !== undefined) {
             methodName = this.className;
         }
-
         // Must return proxied function with same name, no anonymous closures
         return {[methodName](...args: any[]) {
-                const outputValue = method.bind(this)(...args);
+                let outputValue: any;
 
-                if (self.loggers.methodLogger !== undefined) {
-                    const inputParams: any[] = [];
-                    args.forEach((value) => {
-                        inputParams.push(value);
-                    });
-
-                    const logParams: LoggerParams = {
-                        propertyName: methodName,
-                        inputParams,
-                        outputValue,
-                    };
-
-                    if (self.className !== undefined) {
-                        logParams.className = self.className;
+                try {
+                    outputValue = method.bind(this)(...args);
+                } catch (e) {
+                    if (self.loggers.errorLogger !== undefined) {
+                        self.loggers.errorLogger.logError({
+                            message: e.message,
+                        });
                     }
-
-                    self.loggers.methodLogger.logMethodCall(logParams);
+                    throw e;
                 }
+
+                if (self.loggers.methodLogger === undefined) {
+                    return;
+                }
+
+                const inputParams: any[] = [];
+                args.forEach((value) => {
+                    inputParams.push(value);
+                });
+
+                const logParams: LoggerParams = {
+                    propertyName: methodName,
+                    inputParams,
+                    outputValue,
+                };
+
+                if (self.className !== undefined) {
+                    logParams.className = self.className;
+                }
+
+                self.loggers.methodLogger.logMethodCall(logParams);
 
                 return outputValue;
             }}[methodName];

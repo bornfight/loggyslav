@@ -1,6 +1,7 @@
 import {ClassExtractHelper} from "../../helpers/ClassExtractHelper";
 import {LoggerParams} from "../../interfaces/LoggerInterface";
 import {PropertyLogger} from "../loggers/PropertyLogger";
+import {SimpleErrorLoggyslav} from "../loggers/SimpleErrorLoggyslav";
 import {SimpleMethodLoggyslav} from "../loggers/SimpleMethodLoggyslav";
 import {LogClassesInterface, LoggersInterface} from "../Loggyslav";
 import {ClassProxyFactory} from "./ClassProxyFactory";
@@ -11,13 +12,10 @@ export class ClassLoggerProxy {
 
     protected loggers: LoggersInterface = {
         methodLogger: new SimpleMethodLoggyslav(),
-        propertyLogger: new PropertyLogger(),
     };
 
     constructor(logClass: LogClassesInterface) {
         this.logClassProperties = logClass;
-
-        this.attachClassMethodsProxy();
     }
 
     public disable(): void {
@@ -38,7 +36,11 @@ export class ClassLoggerProxy {
         this.loggers.propertyLogger = propertyLogger;
     }
 
-    private attachClassMethodsProxy() {
+    public setErrorLogger(errorLogger: SimpleErrorLoggyslav) {
+        this.loggers.errorLogger = errorLogger;
+    }
+
+    public attachClassMethodsProxy() {
         const classMethods = ClassExtractHelper.getClassMethods(this.logClassProperties.classType);
         const className = ClassExtractHelper.getClassName(this.logClassProperties.classType);
         const classProxyFactory = new ClassProxyFactory(this.loggers, className);
@@ -60,7 +62,7 @@ export class ClassLoggerProxy {
         }
 
         this.logClassProperties.properties.forEach((property: string) => {
-            this.logClassProperties.classType.prototype[property] = Object.defineProperty(
+            Object.defineProperty(
                 this.logClassProperties.classType.prototype,
                 property,
                 {
@@ -69,5 +71,6 @@ export class ClassLoggerProxy {
                 },
             );
         });
+
     }
 }
