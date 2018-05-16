@@ -28,6 +28,16 @@ export class ClassLoggerProxy {
         }
     }
 
+    public enable(): void {
+        if (this.loggers.methodLogger !== undefined) {
+            this.loggers.methodLogger.enable();
+        }
+
+        if (this.loggers.propertyLogger !== undefined) {
+            this.loggers.propertyLogger.enable();
+        }
+    }
+
     public setMethodLogger(methodLogger: SimpleMethodLoggyslav) {
         this.loggers.methodLogger = methodLogger;
     }

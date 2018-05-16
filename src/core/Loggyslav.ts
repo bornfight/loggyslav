@@ -48,6 +48,12 @@ export class Loggyslav {
         });
     }
 
+    public enable() {
+        this.classLoggers.forEach((classLogger: ClassLoggerProxy) => {
+            classLogger.enable();
+        });
+    }
+
     private addClassLogger(classLogger: ClassLoggerProxy) {
         this.classLoggers.push(classLogger);
     }
