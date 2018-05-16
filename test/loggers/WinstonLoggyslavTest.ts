@@ -106,7 +106,7 @@ export class WinstonLoggyslavTest {
         this.initNewLogger(targetsConfiguration, loggerConfiguration);
 
         const simpleClass = new SimpleClass();
-        const spy = sinon.spy(winstonErrorLogger, "error");
+        const spy = this.sandbox.spy(winstonErrorLogger, "error");
 
         try {
             simpleClass.throwError();
