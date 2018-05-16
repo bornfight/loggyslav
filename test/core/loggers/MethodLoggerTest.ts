@@ -1,6 +1,6 @@
 /* tslint:disable:no-unused-expression */
 /* tslint:disable:max-line-length */
-/* tslint:disable:max-classes-per-file */
+/* tslint:disable:max-targets-per-file */
 import * as assert from "assert";
 import * as chai from "chai";
 import {
@@ -9,17 +9,17 @@ import {
 import * as sinon from "sinon";
 import {SinonSandbox} from "sinon";
 import sinonChai = require("sinon-chai");
-import {MethodLogger} from "../../../src/core/loggers/MethodLogger";
+import {SimpleMethodLoggyslav} from "../../../src/core/loggers/SimpleMethodLoggyslav";
 import {LoggerParams, LoggerParamsType} from "../../../src/interfaces/LoggerInterface";
 
 const expect = chai.expect;
 
 chai.use(sinonChai);
 
-@suite("MethodLogger")
+@suite("SimpleMethodLoggyslav")
 export class MethodLoggerTest {
-    protected methodLoggerClass: (new () =>  MethodLogger);
-    protected methodLogger: MethodLogger;
+    protected methodLoggerClass: (new () =>  SimpleMethodLoggyslav);
+    protected methodLogger: SimpleMethodLoggyslav;
     protected sandbox: SinonSandbox;
 
     protected getDefaultLoggerInputLogParams(): LoggerParams {
@@ -46,7 +46,7 @@ export class MethodLoggerTest {
 
     protected before() {
         this.sandbox = sinon.sandbox.create();
-        this.methodLoggerClass = MethodLogger;
+        this.methodLoggerClass = SimpleMethodLoggyslav;
         this.methodLogger = new this.methodLoggerClass();
     }
 

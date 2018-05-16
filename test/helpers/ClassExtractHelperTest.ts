@@ -1,5 +1,6 @@
 /* tslint:disable:no-unused-expression */
 /* tslint:disable:max-line-length */
+/* tslint:disable:max-targets-per-file */
 /* tslint:disable:max-classes-per-file */
 import * as chai from "chai";
 import {

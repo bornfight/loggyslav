@@ -1,9 +1,9 @@
 import {CallSite} from "callsite";
 
 export interface LoggerInterface {
-    log: (...args: any[]) => void;
-    info: (...args: any[]) => void;
-    error: (...args: any[]) => void;
+    log: (...args: any[]) => any;
+    info: (...args: any[]) => any;
+    error: (...args: any[]) => any;
 }
 
 export enum LoggerParamsType {
@@ -28,4 +28,8 @@ export interface LoggerParams extends LoggerOptionalLogParams {
     type?: LoggerParamsType;
     propertyName: string;
     stack?: CallSite[];
+}
+
+export interface ErrorObject extends LoggerOptionalLogParams {
+    message: string;
 }
