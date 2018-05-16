@@ -18,4 +18,8 @@ export class SimpleClass {
     public throwError() {
         throw new Error(SimpleClass.errorMsg);
     }
+
+    public async returnPromise(): Promise<number> {
+        return 2;
+    }
 }
