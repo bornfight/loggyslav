@@ -20,7 +20,7 @@
   "repository": "https://github.com/degordian/loggyslav",
   "license": "ISC",
   "dependencies": {
-    "@degordian/standards": "^1.0.7",
+    "@degordian/standards": "^2.0.0",
     "@degordian/testing-toolkit": "^1.0.17",
     "@types/callsite": "^1.0.30",
     "@types/winston": "^2.3.9",
