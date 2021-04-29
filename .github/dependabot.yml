@@ -1,0 +1,21 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "09:00"
+    timezone: Europe/Zagreb
+  open-pull-requests-limit: 10
+  target-branch: master
+  ignore:
+  - dependency-name: "@types/sinon"
+    versions:
+    - 9.0.10
+    - 9.0.11
+  - dependency-name: "@types/mocha"
+    versions:
+    - 8.2.0
+    - 8.2.1
+  commit-message:
+    prefix: "Automerge - "
